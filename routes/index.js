@@ -44,6 +44,7 @@ router.post("/events", async (req, res) => {
     // we send all the data back so that the front end can have the complete set of data
 
     let {title, url, description, location, start_date, end_date, start_time, end_time, price, age} = req.body;
+   
     db(`INSERT INTO items (title, url, description, location, start_date, end_date, start_time, end_time, price, age) VALUES ('${title}', '${url}', '${description}', '${location}', ${start_date}, ${end_date}, ${start_time}, ${end_time}, ${price}, ${age});`);
 
     const results = await db("SELECT * FROM items ORDER BY id ASC;");
@@ -52,14 +53,38 @@ router.post("/events", async (req, res) => {
   } catch (err) {
     res.send(err)
   }
- 
-  db(`INSERT INTO items (   )`)
-
 });
 
-router.put();
+// to update information in a specific event
+// *** CHECK IF THIS IS CORRECT ***
+router.put("/events/:id", async (req, res) => {
 
-router.delete();
+  try {
+
+    let {title, url, description, location, start_date, end_date, start_time, end_time, price, age} = req.body;
+
+    db(`UPDATE items SET (title, url, description, location, start_date, end_date, start_time, end_time, price, age) VALUES ('${title}', '${url}', '${description}', '${location}', ${start_date}, ${end_date}, ${start_time}, ${end_time}, ${price}, ${age}) where id = ${id};`);
+
+    const results = await db("SELECT * FROM items ORDER BY id ASC;");
+    res.send(results.data);
+
+  } catch (err) {
+    res.send(err);
+  }
+});
+
+router.delete("/events/:id", async (req, res) => {
+  try { // delete by id
+
+    db(`DELETE FROM items WHERE id = ${id};`)
+
+    const results = await db("SELECT * FROM items ORDER BY id ASC;");
+    res.send(results.data);
+
+  } catch (err) {
+    res.send(err)
+  }
+});
 
 
 module.exports = router;
