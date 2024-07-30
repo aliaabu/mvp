@@ -4,12 +4,14 @@ const db = require("../model/helper");
 
 
 /* GET home page. */
-// http://localhost:4000/
+// http://localhost:4000/api
 
+//WORKS
 router.get('/', function(req, res, next) {
   res.send("Welcome to your MVP");
 });
 
+//WORKS
 router.get("/events", async (req, res) => {
   try {
     const results = await db("SELECT * FROM items ORDER BY id ASC;");
@@ -20,6 +22,7 @@ router.get("/events", async (req, res) => {
   }
 });
 
+//WORKS
 router.get("/events/:id", async (req, res) => {
   // go into the request, go into the parameters and look for id
   let id = req.params.id;
@@ -33,11 +36,12 @@ router.get("/events/:id", async (req, res) => {
   }
 });
 
+
 router.post("/events", async (req, res) => {
 
   // mysql already does autoincrement for your id number
   //test
-  console.log(`Hello`, req)
+  console.log(`Hello`, req.body)
   let {title, url, description, location, start_date, end_date, start_time, end_time, price, age} = req.body;
 
   try {
@@ -48,7 +52,7 @@ router.post("/events", async (req, res) => {
     console.log(`before`)
    
     
-    await db(`INSERT INTO items (title, url, description, location, start_date, end_date, start_time, end_time, price, age) VALUES ('${title}', '${url}', '${description}', '${location}', ${start_date}, ${end_date}, ${start_time}, ${end_time}, ${price}, ${age});`);
+    await db(`INSERT INTO items (title, url, description, location, start_date, end_date, price, age) VALUES ('${title}', '${url}', '${description}', '${location}', '${start_date}', '${end_date}', '${start_time}', '${end_time}', ${price}, ${age});`);
 
     const results = await db("SELECT * FROM items ORDER BY id ASC;");
     console.log(`result`)
