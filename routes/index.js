@@ -75,7 +75,6 @@ router.put("/events/:id", async (req, res) => {
     //THIS SYNTAX WORKS
     await db(`UPDATE items SET title="${title}", url="${url}", description="${description}", location="${location}", start_date="${start_date}", end_date="${end_date}", start_time="${start_time}", end_time="${end_time}", price=${price}, age=${age} WHERE id=${id};`)
 
-    console.log("stage 3", req.body)
     const results = await db("SELECT * FROM items ORDER BY id ASC;");
     res.send(results.data);
 
