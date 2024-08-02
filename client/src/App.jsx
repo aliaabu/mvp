@@ -1,35 +1,45 @@
 import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import Calendar from './components/Calendar.jsx'
+
+
 import './App.css'
 
 function App() {
-  const [count, setCount] = useState(0)
+
+  const events = {
+    '2024-08-05' : ['Make smoothie', 'clean stove', 'setup baking station'],
+    '2024-08-06' : ['Make pancakes', 'clean oven', 'setup play dough station']
+}
+
 
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
+    <Calendar events={events} />
+
+    
     </>
   )
 }
 
-export default App
+export default App;
+
+{/* <div className='navbar'>
+<Link to="/">Homepage</Link>
+<Link to="/calendar">Calendar</Link>
+<Link to="/allevents">All Events</Link>
+<Link to="/addevent">Add Event</Link>
+</div>
+
+<Routes>
+<Route path="/" element={<homepage />} />
+<Route path="/calendar" element={<Calendar />}/>
+<Route path="/allevents" element={<allEvents />}/>
+<Route path="/addevent" element={<inputForm />} />
+<Route path=":id" element={<event />}/>
+<Route path="*" element={<page404 />}/>
+
+</Routes>
+
+<div>
+<Calendar events={events}/>
+</div> */}
