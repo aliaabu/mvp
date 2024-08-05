@@ -1,6 +1,9 @@
 import { useState } from 'react'
 import Calendar from './components/Calendar.jsx'
-
+import InputForm from './components/InputForm.jsx';
+import AllEvents from './components/AllEvents.jsx';
+// import Homepage from './components/Homepage.jsx';
+import { Routes, Route, Link } from "react-router-dom";
 
 import './App.css'
 
@@ -11,35 +14,53 @@ function App() {
     '2024-08-06' : ['Make pancakes', 'clean oven', 'setup play dough station']
 }
 
+const [allEvents, setAllEvents] = useState({});
+
 
   return (
     <>
-    <Calendar events={events} />
+    
+    <div className='navbar'>
+      {/* <Link to="/">Homepage</Link> */}
+      <Link to="/Calendar">Calendar</Link>
+      <Link to="/AllEvents">All Events</Link>
+      <Link to="/InputForm">Add Event</Link>
+    </div>
+
+    <Routes>
+    {/* <Route path="/" element={<Homepage />} /> */}
+      <Route path="/calendar" element={<Calendar />}/>
+      <Route path="/allevents" element={<AllEvents allEvents={allEvents} setAllEvents={setAllEvents} />} />
+      <Route path="/addevent" element={<InputForm />} />
+      <Route path=":id" element={<event />}/>
+      <Route path="*" element={<page404 />}/>
+
+    </Routes>
 
     
+
+    <div>
+    <InputForm />
+    </div>
+
+    <div>
+    <Calendar events={events} />
+    </div>
     </>
   )
 }
 
 export default App;
 
-{/* <div className='navbar'>
-<Link to="/">Homepage</Link>
-<Link to="/calendar">Calendar</Link>
-<Link to="/allevents">All Events</Link>
-<Link to="/addevent">Add Event</Link>
-</div>
+{/* 
 
-<Routes>
-<Route path="/" element={<homepage />} />
-<Route path="/calendar" element={<Calendar />}/>
-<Route path="/allevents" element={<allEvents />}/>
-<Route path="/addevent" element={<inputForm />} />
-<Route path=":id" element={<event />}/>
-<Route path="*" element={<page404 />}/>
+- set up useState in App.jsx [events, setEvents]
+- pass the state in the allevents component
+- <Route path="/allEvents" element={<AllEvents events={events} setEvents={setEvents} />} /> this passes the props
+- go back to react lectures to understand 
 
-</Routes>
+- fetch all the events in allevents component
+- set the state to whatever the result of the fetch is
 
-<div>
-<Calendar events={events}/>
-</div> */}
+
+*/}

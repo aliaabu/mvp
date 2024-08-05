@@ -78,8 +78,20 @@
   .schedule {
     margin-left: 10px;
   }
+
+  .schedule-event-list {
+
+    font-weight: 300;
+    margin-bottom: 30px;
+    text-align: left;
+
+
+  }
   
   .schedule-headline {
     font-weight: 600;
     margin-bottom: 30px;
+  
   }
+
+  

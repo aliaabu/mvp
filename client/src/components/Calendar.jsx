@@ -86,14 +86,22 @@ const Calendar = ({ events }) => {
             <div>{activeDay.toLocaleString(DateTime.DATE_MED)}</div>
           )}
         </div>
-        <div>
+        <div className="schedule-event-list">
           {activeDay && activeDayEvents.length === 0 && (
             <div>No Planned Events Today</div>
           )}
           {activeDay && activeDayEvents.length > 0 && (
             <>
               {activeDayEvents.map((event, eventIndex) => (
-                <div key={eventIndex}>{event}</div>
+                <div key={eventIndex}>
+                  <li>
+                  
+                  {event}
+                  
+
+                  </li>
+                  
+                  </div>
               ))}
             </>
           )}
