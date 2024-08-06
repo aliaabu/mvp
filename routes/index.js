@@ -14,7 +14,7 @@ router.get('/', function(req, res, next) {
 //WORKS
 router.get("/events", async (req, res) => {
   try {
-    const results = await db("SELECT * FROM items ORDER BY id ASC;");
+    const results = await db("SELECT * FROM items ORDER BY start_date DESC;");
     res.send(results.data);
 
   } catch (err) {
@@ -51,7 +51,7 @@ router.post("/events", async (req, res) => {
     
     await db(`INSERT INTO items (title, url, description, location, start_date, end_date, start_time, end_time, price, age) VALUES ('${title}', '${url}', '${description}', '${location}', '${start_date}', '${end_date}', '${start_time}', '${end_time}', ${price}, ${age});`);
 
-    const results = await db("SELECT * FROM items ORDER BY id ASC;");
+    const results = await db("SELECT * FROM items ORDER BY start_date DESC;");
     console.log(`result`)
     res.send(results.data);
 
