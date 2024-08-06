@@ -23,7 +23,7 @@ const [allEvents, setAllEvents] = useState([]);
 
     <Routes>
     <Route path="/" element={<Homepage />} >
-    <Route path="/events/:id" element={<Event />}/>
+    {/* <Route path="/events/:id" element={<Event />}/> */}
     </Route>
       <Route path="/calendar" element={<Calendar />}/>
       <Route path="/events" element={<AllEvents allEvents={allEvents} setAllEvents={setAllEvents} />} >

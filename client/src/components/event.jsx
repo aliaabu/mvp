@@ -4,7 +4,7 @@ import { useParams } from "react-router-dom";
 
 export default function Event() {
 
-    const [event, setEvent] = useState();
+    const [event, setEvent] = useState([]);
 
     const {id} = useParams();
     // console.log(id)
@@ -35,8 +35,8 @@ export default function Event() {
         Event Info
         {event && (
             <div>
-                <p>{event.title}</p>
-                <p>{event.location}</p>
+                <p>{event[0].title}</p>
+                <p>{event[0].location}</p>
             </div>
         )}
 
