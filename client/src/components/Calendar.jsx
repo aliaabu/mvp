@@ -3,13 +3,15 @@ import "./Calendar.css";
 import { Info, DateTime, Interval } from "luxon";
 import classnames from "classnames";
 
-const Calendar = ({ events }) => {
+const Calendar = ({ allEventsByDate }) => {
   const today = DateTime.local();
   const [activeDay, setActiveDay] = useState(null);
   const [firstDayOfActiveMonth, setFirstDayOfActiveMonth] = useState(
     today.startOf("month")
   );
-  const activeDayEvents = events[activeDay?.toISODate()] ?? [];
+
+  const activeDayEvents = allEventsByDate[activeDay?.toISODate()] ?? [];
+  
   const weekDays = Info.weekdays("short");
   const daysOfMonth = Interval.fromDateTimes(
     firstDayOfActiveMonth.startOf("week"),

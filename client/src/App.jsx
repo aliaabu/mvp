@@ -1,4 +1,5 @@
-import { useState } from 'react'
+import { useState, useEffect
+ } from 'react'
 import Calendar from './components/Calendar.jsx'
 import InputForm from './components/InputForm.jsx';
 import AllEvents from './components/AllEvents.jsx';
@@ -14,6 +15,25 @@ function App() {
 
 const [allEvents, setAllEvents] = useState([]);
 
+const [allEventsByDate, setAllEventsByDate] = useState([]);
+
+useEffect(() => {
+  getEvents();
+}, []);
+
+const getEvents = () => {
+  fetch("/api/geteventsbydate")
+      .then(res => res.json())
+      .then(json => {
+        setAllEvents(json);
+        console.log(allEvents)
+      })
+      .catch(error => {
+        console.log(error);
+      });
+
+}
+
 
   return (
     <>
@@ -22,7 +42,7 @@ const [allEvents, setAllEvents] = useState([]);
     
 
     <Routes>
-    <Route path="/" element={<Homepage />} >
+    <Route path="/" element={<Homepage allEventsByDate={allEventsByDate} setAllEventsByDate={setAllEventsByDate}/>} >
     {/* <Route path="/events/:id" element={<Event />}/> */}
     </Route>
       <Route path="/calendar" element={<Calendar />}/>

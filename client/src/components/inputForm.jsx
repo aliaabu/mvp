@@ -10,13 +10,12 @@ export default function InputForm({allEvents, setAllEvents}) {
     url:"",
     description:"",
     location:"",
-    start_date: "",
-    end_date: "",
-    start_time: "",
-    end_time: "", 
+    date: "",
+    time: "",
+    duration:"",
     price: 0,
     age: 0,
-  })
+  });
     
     //when the page loads, perform this
     useEffect(() => {
@@ -58,11 +57,13 @@ export default function InputForm({allEvents, setAllEvents}) {
         });
         const updatedEvents = await response.json();
         setAllEvents(updatedEvents);
+        console.log(updatedEvents)
 
       } catch(err) {
         console.log(err)
       }
-    }
+    };
+
     return <>
         <div className="title">
           <p>
@@ -109,41 +110,32 @@ export default function InputForm({allEvents, setAllEvents}) {
         onChange={handleInputChange}
         value={newEvent.location}/>
 
-<span className="input-group-text">Start Date</span>
+<span className="input-group-text">Date</span>
         <input
         type="date"
         className="form-control"
-        aria-label="start_date"
-        name="start_date"
+        aria-label="date"
+        name="date"
         onChange={handleInputChange}
-        value={newEvent.start_date}/>
+        value={newEvent.date}/>
 
-<span className="input-group-text">End Date</span>
-        <input
-        type="date"
-        className="form-control"
-        aria-label="end_date"
-        name="end_date"
-        onChange={handleInputChange}
-        value={newEvent.end_date}/>
-
-<span className="input-group-text">Start Time</span>
+<span className="input-group-text">Time</span>
         <input
         type="time"
         className="form-control"
-        aria-label="start_time"
-        name="start_time"
+        aria-label="time"
+        name="time"
         onChange={handleInputChange}
-        value={newEvent.start_time}/>
+        value={newEvent.time}/>
 
-<span className="input-group-text">End Time</span>
+<span className="input-group-text">Duration</span>
         <input
-        type="time"
+        type="text"
         className="form-control"
-        aria-label="end_time"
-        name="end_time"
+        aria-label="duration"
+        name="duration"
         onChange={handleInputChange}
-        value={newEvent.end_time}/>
+        value={newEvent.duration}/>
 
 <span className="input-group-text">Price</span>
         <input
@@ -151,7 +143,8 @@ export default function InputForm({allEvents, setAllEvents}) {
         className="form-control"
         aria-label="price"
         name="price"
-        onChange={handleInputChange}/>
+        onChange={handleInputChange}
+        value={newEvent.price}/>
 
 <span className="input-group-text">Age</span>
         <input
@@ -159,7 +152,8 @@ export default function InputForm({allEvents, setAllEvents}) {
         className="form-control"
         aria-label="age"
         name="age"
-        onChange={handleInputChange}/>     
+        onChange={handleInputChange}
+        value={newEvent.age}/>     
  
 
 </div>

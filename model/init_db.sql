@@ -15,10 +15,9 @@ CREATE TABLE items(
     `url` VARCHAR(255) NULL,
     `description` VARCHAR(255) NULL,
     `location` VARCHAR (255) NULL,
-    `start_date` DATE NOT NULL,
-    `end_date` DATE NOT NULL,
-    `start_time` TIME NOT NULL,
-    `end_time` TIME NOT NULL,
+    `date` DATE NOT NULL,
+    `time` TIME NOT NULL,
+    `duration` VARCHAR(255) NULL,
     `price` INT NOT NULL,
     `age` INT NOT NULL,
     PRIMARY KEY(id)
