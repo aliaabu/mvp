@@ -2,19 +2,17 @@ import { useState, useEffect } from "react"
 import { useParams } from "react-router-dom";
 
 
-export default function Event() {
+export default function Event({event, setEvent, selectedEventId}) {
+    useEffect(() => {
+        getEventDetails();
+    }, [selectedEventId]);
 
-    const [event, setEvent] = useState([]);
-
-    const {id} = useParams();
-    // console.log(id)
 
     const getEventDetails = async () => {
         try {
-            const result = await fetch(`/api/events/${id}`);
-            const data = await result.json();
-            // console.log(data);
-            setEvent(data);
+            const result = await fetch(`/api/events/${selectedEventId}`);
+            const event = await result.json();
+            setEvent(event);
             
 
         } catch(err) {
@@ -22,9 +20,7 @@ export default function Event() {
         }
     };
 
-    useEffect(() => {
-        getEventDetails();
-    }, [id]);
+   
 
     
 
@@ -32,11 +28,17 @@ export default function Event() {
     return <>
 
         <div>
-        Event Info
+        
         {event && (
             <div>
-                <p>{event[0].title}</p>
-                <p>{event[0].location}</p>
+                <h3>
+                    {event.title}
+                </h3>
+
+                <p>{event.url}</p>
+                <p>{event.description}</p>
+                
+               
             </div>
         )}
 

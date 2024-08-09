@@ -44,6 +44,19 @@ export default function InputForm({allEvents, setAllEvents}) {
     const handleSubmit = (event) => {
       event.preventDefault();
       addEvent();
+      setNewEvent({
+        title:"",
+        url:"",
+        description:"",
+        location:"",
+        date: "",
+        time: "",
+        duration:"",
+        price: 0,
+        age: 0,
+
+      })
+
     };
 
     const addEvent = async () => {
@@ -71,95 +84,129 @@ export default function InputForm({allEvents, setAllEvents}) {
           </p>
         </div>
 
-        <form onSubmit={handleSubmit}>
-    <div className="input-group mb-3">
+        <div className="container" >
+        <form className="row g-3" onSubmit={handleSubmit} >
+       
 
-    <span className="input-group-text">Title</span>
-    <input
-    type="text"
-    className="form-control"
-    aria-label="title"
-    name="title"
-    onChange={handleInputChange}
-    value={newEvent.title}/>
+          <div className="row">
+            <div className="col md-6">
+              <label for="title"></label>
+              <input
+                type="text"
+                className="form-control"
+                aria-label="title"
+                placeholder="Event name"
+                name="title"
+                onChange={handleInputChange}
+                value={newEvent.title}/>
+            </div>
+              <div className="col md-6">
+                <label for="url"></label>
+                <input
+                  type="text"
+                  className="form-control"
+                  aria-label="url"
+                  placeholder="Event website"
+                  name="url"
+                  onChange={handleInputChange}
+                  value={newEvent.url}/>
+              </div>
+          </div>
 
-    <span className="input-group-text">URL</span>
-        <input
-        type="text"
-        className="form-control"
-        aria-label="url"
-        name="url"
-        onChange={handleInputChange}
-        value={newEvent.url}/>
+          <div className="form-group mb-3">
+            <label for="description"></label>
+            
+            <textarea
+                rows="3"
+                maxLength="255"
+                type="text"
+                className="form-control"
+                aria-label="description"
+                placeholder="A short description on what the event is about. Max 255 characters"
+                name="description"
+                onChange={handleInputChange}
+                value={newEvent.description}/>
 
-    <span className="input-group-text">Description</span>
-        <input
-        type="text"
-        className="form-control"
-        aria-label="description"
-        name="description"
-        onChange={handleInputChange}
-        value={newEvent.description}/>
+          </div>
 
-<span className="input-group-text">Location</span>
-        <input
-        type="text"
-        className="form-control"
-        aria-label="location"
-        name="location"
-        onChange={handleInputChange}
-        value={newEvent.location}/>
+          <div className="row mb-3">
+            <div className="col-md-4">
+              <label for="location">Location</label>
+              <input
+                type="text"
+                className="form-control"
+                aria-label="location"
+                name="location"
+                onChange={handleInputChange}
+                value={newEvent.location}/>
+            </div>
 
-<span className="input-group-text">Date</span>
-        <input
-        type="date"
-        className="form-control"
-        aria-label="date"
-        name="date"
-        onChange={handleInputChange}
-        value={newEvent.date}/>
+            <div className="col-md-4">
+              <label for="date">Date</label>
+              <input
+                type="date"
+                className="form-control"
+                aria-label="date"
+                name="date"
+                onChange={handleInputChange}
+                value={newEvent.date}/>
+            </div>
 
-<span className="input-group-text">Time</span>
-        <input
-        type="time"
-        className="form-control"
-        aria-label="time"
-        name="time"
-        onChange={handleInputChange}
-        value={newEvent.time}/>
+            <div className="col-md-4">
+              <label for="time">Time</label>
+              <input
+                type="time"
+                className="form-control"
+                aria-label="time"
+                name="time"
+                onChange={handleInputChange}
+                value={newEvent.time}/>
+            </div>
+          </div>
 
-<span className="input-group-text">Duration</span>
-        <input
-        type="text"
-        className="form-control"
-        aria-label="duration"
-        name="duration"
-        onChange={handleInputChange}
-        value={newEvent.duration}/>
+          <div className="row mb-3">
+          
+            <div className="col-md-4">
+              <label for="duration">Duration</label>
+              <input
+                type="text"
+                className="form-control"
+                aria-label="duration"
+                name="duration"
+                onChange={handleInputChange}
+                value={newEvent.duration}/>
+            </div>
 
-<span className="input-group-text">Price</span>
-        <input
-        type="text"
-        className="form-control"
-        aria-label="price"
-        name="price"
-        onChange={handleInputChange}
-        value={newEvent.price}/>
+            <div className="col-md-4">
+              <label for="price">Price</label>
+              <input
+                type="text"
+                className="form-control"
+                aria-label="price"
+                name="price"
+                onChange={handleInputChange}
+                value={newEvent.price}/>
+            </div>
 
-<span className="input-group-text">Age</span>
-        <input
-        type="text"
-        className="form-control"
-        aria-label="age"
-        name="age"
-        onChange={handleInputChange}
-        value={newEvent.age}/>     
+            <div className="col-md-4">
+              <label for="age">Age</label>
+              <input
+                type="text"
+                className="form-control"
+                aria-label="age"
+                name="age"
+                onChange={handleInputChange}
+                value={newEvent.age}/>  
+            </div>
+          </div>
  
-
-</div>
-
+    <div className="col-12">
     <button className="btn btn-primary">Add</button>
+    </div>
+    
     </form>
+
+    </div>
 
 
     </>

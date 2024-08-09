@@ -11,7 +11,7 @@ function NavBar () {
       <Link to="/events">All Events</Link>
       <Link to="/InputForm">Add Event</Link>
     </div>
-        
+  
         
         </>
 

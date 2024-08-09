@@ -3,9 +3,9 @@ import App from "../App";
 import { useState, useEffect } from "react";
 import { Outlet } from "react-router-dom";
 
-export default function Homepage() {
+export default function Homepage({setAllEventsByDate, allEventsByDate}) {
 
-  const [allEventsByDate, setAllEventsByDate] = useState([]);
+  
 
   useEffect(() => {
     getEventsByDate();

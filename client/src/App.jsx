@@ -1,5 +1,4 @@
-import { useState, useEffect
- } from 'react'
+import { useState, useEffect } from 'react'
 import Calendar from './components/Calendar.jsx'
 import InputForm from './components/InputForm.jsx';
 import AllEvents from './components/AllEvents.jsx';
@@ -13,9 +12,13 @@ import './App.css'
 
 function App() {
 
+const [event, setEvent] = useState(null);
+
 const [allEvents, setAllEvents] = useState([]);
 
 const [allEventsByDate, setAllEventsByDate] = useState([]);
+
+const [selectedEventId, setSelectedEventId] = useState(null);
 
 useEffect(() => {
   getEvents();
@@ -38,19 +41,25 @@ const getEvents = () => {
   return (
     <>
     <NavBar />
-
-    
-
     <Routes>
     <Route path="/" element={<Homepage allEventsByDate={allEventsByDate} setAllEventsByDate={setAllEventsByDate}/>} >
-    {/* <Route path="/events/:id" element={<Event />}/> */}
     </Route>
+
       <Route path="/calendar" element={<Calendar />}/>
-      <Route path="/events" element={<AllEvents allEvents={allEvents} setAllEvents={setAllEvents} />} >
-      <Route path=":id" element={<Event />}/>
-      </Route>
+
+      <Route path="/events" element={<AllEvents 
+      allEvents={allEvents} 
+      setAllEvents={setAllEvents} 
+      event={event} 
+      setEvent={setEvent} 
+      selectedEventId={selectedEventId} 
+      setSelectedEventId={setSelectedEventId}/>} />
+      
+  
       <Route path="/InputForm" element={<InputForm allEvents={allEvents} setAllEvents={setAllEvents} />} />
-      <Route path="/events/:id" element={<Event />}/>
+
+      <Route path="/events/:id" element={<Event event={event} setEvent={setEvent} selectedEventId={selectedEventId}/>}/>
+
       <Route path="*" element={<Page404 />}/>
 
     </Routes>

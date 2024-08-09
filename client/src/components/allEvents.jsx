@@ -1,47 +1,75 @@
 import React, { useEffect } from "react";
-import { Link, Outlet } from "react-router-dom";
-export default function AllEvents({allEvents, setAllEvents} ) {
+import { Link } from "react-router-dom";
+import Event from "./Event";
 
+export default function AllEvents({allEvents, setAllEvents, selectedEventId, setSelectedEventId} ) {
     
     //when the page loads, perform this
     useEffect(() => {
       getEvents();
     }, []);
 
-    const getEvents = () => {
-      fetch("/api/events")
-          .then(res => res.json())
-          .then(json => {
-            setAllEvents(json);
-            console.log(allEvents)
-          })
-          .catch(error => {
-            console.log(error);
-          });
+    const getEvents = async () => {
+      try {
+        const result = await fetch(`/api/events`);
+        const data = await result.json();
+        setAllEvents(data);
+        console.log(allEvents)
+      } catch (err) {
+        console.log(err);
+      }
+    };
 
+    const deleteEvent = async (id) => {
+      console.log("deleteEvent", id)
+      try{
+        const response = await fetch(`/api/events/${id}`, {
+          method: "DELETE",
+        });
+        const updatedEvents = await response.json();
+        setAllEvents(updatedEvents);
+
+      } catch(err) {
+        console.log(err)
+      }
     }
 
-
-    // I'd like to list all the events, in order of date and then in order of time, and then in alphabetical order
     return <>
 
     
     <div className="All-Events">
       <h1> List of all events:</h1>
+<div className="row mt-4 mx-2">
+      
+      <div className="list-group col-6 ">  
 
-      <ul className="events-list"> 
-        {/* allEvents && waits for allEvents to load / the async function to complete its work. Can also use conditional statement to do this */}
-        {allEvents ? allEvents.map((event) => (
-          <Link to={`/events/${event.id}`} className="list-group-item" key={event.id}>{event.title}</Link>
+      {allEvents ? allEvents.map((event) => (
+      <div className="list-group-item d-flex justify-content-between" key={event.id}>
+        
+        <h6 className="row" onClick={() => setSelectedEventId(event.id)}>
+          {event.title}
+          </h6> 
+        
+      
+      
+      <p><button className="btn btn-sm btn-danger" onClick={() => deleteEvent(event.id)}>delete</button></p>
+      </div>
         )): null}
- 
-      </ul>
+      </div> 
+
+        {selectedEventId && (
+          <div className="col">
+          <Event selectedEventId />
+        </div>
+        )
+        }
+      
+    
     
     </div>
-    <div>
-      <Outlet />
     </div>
-    
     </>
   };
 
+  // allEvents && waits for allEvents to load / the async function to complete its work. Can also use conditional statement to do this 
+ 
