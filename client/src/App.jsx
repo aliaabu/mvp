@@ -58,7 +58,10 @@ const getEvents = () => {
   
       <Route path="/InputForm" element={<InputForm allEvents={allEvents} setAllEvents={setAllEvents} />} />
 
-      <Route path="/events/:id" element={<Event event={event} setEvent={setEvent} selectedEventId={selectedEventId}/>}/>
+      <Route path="/events/:id" element={<Event 
+      event={event} 
+      setEvent={() => setEvent()} 
+      selectedEventId={selectedEventId}/>}/>
 
       <Route path="*" element={<Page404 />}/>
 
